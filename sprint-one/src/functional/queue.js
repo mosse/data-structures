@@ -13,6 +13,9 @@ var Queue = function(){
   };
 
   someInstance.dequeue = function(){
+    if (head !== tail) {
+      return storage[head++];
+    }
   };
 
   someInstance.size = function(){
