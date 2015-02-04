@@ -13,7 +13,7 @@ var Queue = function(){
   };
 
   someInstance.dequeue = function(){
-    if (head !== tail) {
+    if (head < tail) {
       return storage[head++];
     }
   };
