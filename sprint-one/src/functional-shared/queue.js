@@ -3,14 +3,19 @@ var Queue = function(){
   // but try not not reference your old code in writing the new style.
   var head = 0;
   var tail = 0;
-  var obj = {head: head, tail: tail};
+  var storage = {};
+  var obj = {storage: storage, head: head, tail: tail};
   return _.extend(obj, queueMethods);
 };
 
 var queueMethods = {
   size: function() {
     return this.tail - this.head;
-  }
+  },
+  enqueue: function(val){
+    this.storage[this.tail++] = val;
+  },
+
 };
 
 
