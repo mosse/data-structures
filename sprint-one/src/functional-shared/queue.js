@@ -4,10 +4,14 @@ var Queue = function(){
   var head = 0;
   var tail = 0;
   var obj = {head: head, tail: tail};
-  var _.extend(obj, queueMethods);
+  return _.extend(obj, queueMethods);
 };
 
-var queueMethods = {};
+var queueMethods = {
+  size: function() {
+    return this.tail - this.head;
+  }
+};
 
 
 
