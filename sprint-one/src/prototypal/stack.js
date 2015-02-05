@@ -13,6 +13,12 @@ var stackMethods = {
   },
   push: function(val) {
     this.storage[this.numElements++] = val;
+  },
+  pop: function() {
+    this.numElements && this.numElements--;
+    var value = this.storage[this.numElements];
+    delete this.storage[this.numElements];
+    return value;
   }
 };
 
