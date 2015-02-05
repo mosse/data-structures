@@ -15,6 +15,12 @@ var queueMethods = {
   enqueue: function(val){
     this.storage[this.tail++] = val;
   },
+  dequeue: function() {
+    if (this.tail > this.head) {
+      var result = this.storage[this.head++];
+      return result;
+    }
+  }
 
 };
 
