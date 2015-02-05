@@ -10,7 +10,11 @@ var Stack = function() {
 var stackMethods = {
   size: function() {
     return this.numElements;
+  },
+  push: function(val) {
+    this.storage[this.numElements++] = val;
   }
 };
+
 
 
