@@ -14,6 +14,11 @@ var queueMethods = {
   },
   enqueue: function(val) {
     this.storage[this.tail++] = val;
+  },
+  dequeue: function() {
+    if (this.size() > 0){
+      return this.storage[this.head++];
+    }
   }
 
 };
