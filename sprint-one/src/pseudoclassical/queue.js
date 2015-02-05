@@ -15,9 +15,7 @@ Queue.prototype.enqueue = function(val) {
 };
 
 Queue.prototype.dequeue = function() {
-  if (this.size() > 0){
-    return this.storage[this.head++];
-  }
+  return (this.size() > 0) ? this.storage[this.head++] : undefined;
 };
 
 
