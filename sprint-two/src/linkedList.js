@@ -1,10 +1,16 @@
 var LinkedList = function(){
   var list = {};
   list.tail = null;
+  list.head = null;
+  var size = 0;
 
   list.addToTail = function(value){
     var node = Node(value);
     list.tail = node;
+    if (size === 0){
+      list.head = node;
+    }
+    size++;
   };
 
   list.removeHead = function(){
