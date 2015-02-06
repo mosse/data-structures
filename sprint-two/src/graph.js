@@ -25,7 +25,14 @@ Graph.prototype.contains = function(val){
   return false;
 };
 
-Graph.prototype.removeNode = function(node){
+Graph.prototype.removeNode = function(val){
+  // iterate over nodes
+  for (var i = 0; i < this._nodes.length; i++) {
+    // check at each index for target node
+    if (this._nodes[i]._val === val) {
+      this._nodes.splice(i, 1);
+    }
+  }
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
