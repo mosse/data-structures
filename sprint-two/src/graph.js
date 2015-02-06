@@ -59,7 +59,22 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-
+  // find fromNode and toNode as references
+  var n1 = this._nodes[this.find(fromNode)];
+  var n2 = this._nodes[this.find(toNode)];
+  // iterate over fromNode's connections
+  _.each(n1._connections, function(node, i) {
+    if (node._name === toNode) {
+      n1._connections.splice(i, 1);
+    }
+  });
+  // iterate over toNode's connections
+  //    if connections's value === fromNode, splice
+  _.each(n2._connections, function(node, i) {
+    if (node._name === fromNode) {
+      n2._connections.splice(i, 1);
+    }
+  });
 };
 
 Graph.prototype.forEachNode = function(cb){
