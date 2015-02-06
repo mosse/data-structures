@@ -30,12 +30,21 @@ Graph.prototype.contains = function(name){
 };
 
 Graph.prototype.removeNode = function(name){
-  var foundAt = this.find(name);
+  var foundAt = this.find(name)
   this._nodes.splice(foundAt, 1);
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
+  // find node
+  var n1 = this._nodes[this.find(fromNode)];
 
+  // iterate over connections to see if toNode present
+  for (var i = 0; i < n1._connections.length; i++) {
+    if (n1._connections[i]._name === toNode) {
+      return true;
+    }
+  }
+  return false;
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
@@ -50,6 +59,7 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
+
 };
 
 Graph.prototype.forEachNode = function(cb){
