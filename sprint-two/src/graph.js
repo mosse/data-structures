@@ -14,42 +14,35 @@ Graph.prototype.addNode = function(name){
   this._nodes.push(node);
 };
 
-Graph.prototype.contains = function(name){
+Graph.prototype.find = function(name) {
   // iterate over nodes
   for (var i = 0; i < this._nodes.length; i++) {
-    // check at each index if node there has target name
+    // if node's name is name
     if (this._nodes[i]._name === name) {
-      return true;
+      return i;
     }
   }
-  return false;
+  return -1;
+};
+
+Graph.prototype.contains = function(name){
+  return (this.find(name) === -1) ? false : true;
 };
 
 Graph.prototype.removeNode = function(name){
-  // iterate over nodes
-  for (var i = 0; i < this._nodes.length; i++) {
-    // check at each index for target node
-    if (this._nodes[i]._name === name) {
-      this._nodes.splice(i, 1);
-    }
-  }
+  var foundAt = this.find(name);
+  this._nodes.splice(foundAt, 1);
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
+
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
-  // Iterate through nodes
-  for (var i = 0; i < this._nodes.length; i++ ) {
-    // If current node = fromNode set ref n1
-    if (this._nodes[i]._name === fromNode) {
-      var n1 = this._nodes[i];
-    }
-    // If current node = toNode set ref n2
-    if (this._nodes[i]._name === toNode) {
-      var n2 = this._nodes[i];
-    }
-  }
+
+  var n1 = this._nodes[this.find(fromNode)];
+  var n2 = this._nodes[this.find(toNode)];
+
   // Push n2 to connections of n1
   n1._connections.push(n2);
   // Push n1 to connections of n2
