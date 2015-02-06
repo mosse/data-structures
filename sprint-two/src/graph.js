@@ -3,6 +3,11 @@
 var Graph = function(){
 };
 
+var Node = function(val){
+  this._connections = [];
+  this._val = val;
+};
+
 Graph.prototype.addNode = function(node){
 };
 
