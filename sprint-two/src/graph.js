@@ -78,6 +78,10 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.forEachNode = function(cb){
+  // iterate over each node in graph
+  _.each(this._nodes, function(node){
+    cb(node._name);
+  });
 };
 
 /*
