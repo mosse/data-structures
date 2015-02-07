@@ -50,5 +50,14 @@ BinarySearchTree.prototype.contains = function(value) {
   };
 
 BinarySearchTree.prototype.depthFirstLog = function(callback) {
+  // base case: run callback on this.value
+  callback(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(callback);
+  }
+  // if right is not null, then recursively call
+  if (this.right) {
+    this.right.depthFirstLog(callback);
+  }
 
 };
