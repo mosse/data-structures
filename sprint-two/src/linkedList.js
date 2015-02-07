@@ -4,7 +4,7 @@ var LinkedList = function(){
   list.head = null;
 
   list.addToTail = function(value){
-    var node = Node(value);
+    var node = LinkedListNode(value);
     if (!list.head) {
       list.head = node;
     } else {
@@ -33,7 +33,7 @@ var LinkedList = function(){
   return list;
 };
 
-var Node = function(value){
+var LinkedListNode = function(value){
   var node = {};
 
   node.value = value;
