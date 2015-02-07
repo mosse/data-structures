@@ -12,7 +12,7 @@ HashTable.prototype.insert = function(k, v){
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var result;
+  var result = null;
   _.each(this._storage[i], function(tuple){
     if (tuple[0] === k){
       result = tuple[1];
@@ -22,7 +22,18 @@ HashTable.prototype.retrieve = function(k){
 };
 
 HashTable.prototype.remove = function(k){
-
+  // pass key into hash function to get index
+  var i = getIndexBelowMaxForKey(k, this._limit);
+  // get bucket at index
+  var bucket = this._storage[i];
+  // iterate through the bucket
+  for (var j = 0; j < bucket.length; j++) {
+    if (bucket[j][0] === k) {
+      bucket.splice(j, 1);
+    }
+  }
+  //    for each element, check if el[0] === k
+  //      splice at i
 };
 
 
