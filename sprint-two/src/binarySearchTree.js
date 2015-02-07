@@ -1,4 +1,7 @@
 var BinarySearchTree = function(value){
+  this._val = value;
+  this._left = null;
+  this._right = null;
 };
 
 
