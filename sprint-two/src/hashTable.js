@@ -23,6 +23,10 @@ HashTable.prototype.insert = function(k, v){
     this._storage.set(i, bucket);
     this._counter++;
   }
+
+  if (this._counter > 0.75 * this._limit) {
+    this._resize(this._limit * 2);
+  }
 };
 
 HashTable.prototype.retrieve = function(k){
@@ -45,11 +49,31 @@ HashTable.prototype.remove = function(k){
   for (var j = 0; j < bucket.length; j++) {
     if (bucket[j][0] === k) {
       var result = bucket.splice(j, 1);
+      if (this._counter < 0.25 * this._limit) {
+        this._resize(this._limit * 0.5);
+      }
       return result[1];
     }
   }
-  //    for each element, check if el[0] === k
-  //      splice at i
+
+};
+
+HashTable.prototype._resize = function(newLimit) {
+  var copy = this._storage;
+  this._storage = new LimitedArray(newLimit);
+  this._limit = newLimit;
+  this._counter = 0;
+
+  var context = this;
+  copy.each(function(bucket) {
+    if (bucket) {
+      for (var i = 0; i < bucket.length; i++) {
+        var key = bucket[i][0];
+        var val = bucket[i][1];
+        context.insert(key, val);
+      }
+    }
+  });
 };
 
 
