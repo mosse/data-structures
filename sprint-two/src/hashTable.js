@@ -1,19 +1,34 @@
 var HashTable = function(){
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._counter = 0;
 };
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  // at index i of storage, set the tuple as (k, v)
-  this._storage[i] = this._storage[i] || [];
-  this._storage[i].push([k, v]);
+  var found = false;
+  var bucket = this._storage.get(i);
+  bucket = bucket || [];
+
+  for (var j = 0; j < bucket.length; j++){
+    var tuple = bucket[j];
+    if (tuple[0] === k){
+      tuple[1] = v;
+      found = true;
+    }
+  }
+
+  if (!found){
+    bucket.push([k, v]);
+    this._storage.set(i, bucket);
+    this._counter++;
+  }
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var result = null;
-  _.each(this._storage[i], function(tuple){
+  _.each(this._storage.get(i), function(tuple){
     if (tuple[0] === k){
       result = tuple[1];
     }
@@ -25,11 +40,12 @@ HashTable.prototype.remove = function(k){
   // pass key into hash function to get index
   var i = getIndexBelowMaxForKey(k, this._limit);
   // get bucket at index
-  var bucket = this._storage[i];
+  var bucket = this._storage.get(i);
   // iterate through the bucket
   for (var j = 0; j < bucket.length; j++) {
     if (bucket[j][0] === k) {
-      bucket.splice(j, 1);
+      var result = bucket.splice(j, 1);
+      return result[1];
     }
   }
   //    for each element, check if el[0] === k
